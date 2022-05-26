@@ -6,16 +6,32 @@
 const caesarModule = (function () {
   // you can add any code you want within this function scope
   function getAlphabet() {
-    return {
-      "a": 1, "b": 2, "c": 3, "d": 4, "e": 5, "f": 6, "g": 7, "h": 8, "i": 9,
-      "j": 10, "k": 11, "l": 12, "m": 13, "n": 14, "o": 15, "p": 16, "q": 17,
-      "r": 18, "s": 19, "t": 20, "u": 21, "v": 22, "w": 23, "x": 24, "y": 25,
-      "z": 26
-    };
+    return [
+           "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
+           "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"
+          ];
+  }
+
+  function shiftMessage(alphabet, cipher, shift) {
+    let message = "";
+    for (let position in cipher) {
+      const letter = cipher[position];
+      if (alphabet.includes(letter)) {
+        const oldIndex = alphabet.indexOf(letter);
+        let newIndex = oldIndex + shift;
+        if (newIndex > 25) newIndex = newIndex - 26;
+        else if (newIndex < 0) newIndex = newIndex + 26;
+        message += alphabet[newIndex];
+      } else message += letter;
+    }
+    return message;
+  
   }
   
   function caesar(input, shift, encode = true) {
     if (shift === 0 || shift < -25 || shift > 25) return false;
+    const alphabet = getAlphabet();
+    return shiftMessage(alphabet, input.toLowerCase(), shift);
   }
 
   return {

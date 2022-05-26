@@ -17,4 +17,14 @@ describe("Caesar", () => {
         const twentySix = caesar("Try This", 26);
         expect(twentySix).to.be.false;
     })
+
+    it("wraps around the end of the alphabet", () => {
+        const zShiftThree = caesar("z", 3);
+        expect(zShiftThree).to.equal("c");
+    })
+
+    it("wraps around the beginning of the alphabet", () => {
+        const aShiftThree = caesar("a", -3);
+        expect(aShiftThree).to.equal("x");
+    })
 })
