@@ -6,8 +6,20 @@
 const substitutionModule = (function () {
   // you can add any code you want within this function scope
 
+  function standardAlphabet() {
+    return "abcdefghijklmnopqrstuvwxyz";
+  }
+
+  function duplicateCheck(alphabet) {
+    const letters = alphabet.split("");
+    letters.sort((a, b) => a < b ? -1 : 1);
+    const dups = letters.filter((letter, index) => letter === letters[index + 1]);
+    return dups.length > 0;
+  }
+  
   function substitution(input, alphabet, encode = true) {
-    // your solution code here
+    if (alphabet.length != 26 || duplicateCheck(alphabet)) return false;
+
   }
 
   return {
