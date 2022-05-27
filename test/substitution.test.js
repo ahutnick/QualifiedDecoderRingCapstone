@@ -3,7 +3,7 @@ const substitution = require("../src/substitution")["substitution"];
 const expect = require("chai").expect;
 
 describe("Substitution", () => {
-    it ("should return false if given an alphabet with less than 26 characters", () => {
+    it("should return false if given an alphabet with less than 26 characters", () => {
         const tooFew = substitution("hi", "!@#$%^&*()");
         expect(tooFew).to.be.false;
     });
@@ -47,5 +47,5 @@ describe("Substitution", () => {
     it("should include special characters", () => {
         const special = substitution("%$))@", "abcd$fg%ijk)mn@pqrstuvwxyz", false);
         expect(special).to.equal("hello");
-    })
-})
+    });
+});

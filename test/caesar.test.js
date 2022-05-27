@@ -38,5 +38,5 @@ describe("Caesar", () => {
         const message = "usz uijt";
         const decoded = caesar(message, 1, false);
         expect(decoded).to.equal("try this");
-    })
-})
+    });
+});

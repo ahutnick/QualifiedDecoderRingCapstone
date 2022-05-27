@@ -18,7 +18,7 @@ describe("Polybius", () => {
             const upper = polybius("TRY THIS");
             const lower = polybius("try this");
             expect(upper).to.equal(lower);
-        })
+        });
 
     });
 
@@ -38,4 +38,4 @@ describe("Polybius", () => {
             expect(message).to.equal("a b c d e");
         });
     });
-})
+});
