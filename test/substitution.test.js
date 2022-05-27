@@ -13,8 +13,28 @@ describe("Substitution", () => {
         expect(tooMany).to.be.false;
     });
 
-    it ("should return false if the characters in the alphabet are not unique", () => {
+    it("should return false if the characters in the alphabet are not unique", () => {
         const notUnique = substitution("hi", "zzyxwvutsrqponmlkjihgfedcb");
         expect(notUnique).to.be.false;
     });
+
+    it("should return false if the alphabet is missing", () => {
+        const missing = substitution("hello");
+        expect(missing).to.be.false;
+    })
+
+    it("should convert message to the included alphabet when encoding", () => {
+        const encoded = substitution("hello", "zyxwvutsrqponmlkjihgfedcba");
+        expect(encoded).to.equal("svool");
+    })
+
+    it("should convert message to the standard alphabet when decoding", () => {
+        const decoded = substitution("svool", "zyxwvutsrqponmlkjihgfedcba", false);
+        expect(decoded).to.equal("hello");
+    })
+
+    it("should leave spaces where they are", () => {
+        const spaces = substitution("svool svool", "zyxwvutsrqponmlkjihgfedcba", false);
+        expect(spaces).to.equal("hello hello");
+    })
 })

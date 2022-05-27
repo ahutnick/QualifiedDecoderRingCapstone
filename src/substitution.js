@@ -16,10 +16,26 @@ const substitutionModule = (function () {
     const dups = letters.filter((letter, index) => letter === letters[index + 1]);
     return dups.length > 0;
   }
+
+  function crypt(input, base, outcome) {
+    let message = ""
+    for (let position in input) {
+      const letter = input[position];
+      if (base.includes(letter)) {
+        const index = base.indexOf(letter);
+        message += outcome[index];
+      } else {
+        message += letter;
+      }
+    }
+    return message;
+  }
   
   function substitution(input, alphabet, encode = true) {
-    if (alphabet.length != 26 || duplicateCheck(alphabet)) return false;
-
+    if (!alphabet) return false;
+    if (alphabet.length != 26 || duplicateCheck(alphabet) || !alphabet) return false;
+    const standard = standardAlphabet();
+    return (encode) ? crypt(input, standard, alphabet) : crypt(input, alphabet, standard);
   }
 
   return {
