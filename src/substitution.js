@@ -4,12 +4,15 @@
 // of the anonymous function on line 6
 
 const substitutionModule = (function () {
-  // you can add any code you want within this function scope
-
+  // Set up standard alphabet for reference against new alphabet string
   function standardAlphabet() {
     return "abcdefghijklmnopqrstuvwxyz";
   }
 
+  /* Split the alphabet into an array to sort alphabetically and filter
+   * for duplicates. If any are found (the dups array has a length greater
+   * than 0), return true.
+  */
   function duplicateCheck(alphabet) {
     const letters = alphabet.split("");
     letters.sort((a, b) => a < b ? -1 : 1);
@@ -17,6 +20,12 @@ const substitutionModule = (function () {
     return dups.length > 0;
   }
 
+  /* Replace the values of one alphabet for values with the same position
+   * in another. Loop through the input string. If the character is in the
+   * base (starting) alphabet, then store the index of that character. Then,
+   * add the character at the same index in the new alphabet into a message
+   * string. Else, add the original character. Return the message. 
+  */
   function crypt(input, base, outcome) {
     let message = ""
     for (let position in input) {
@@ -30,7 +39,11 @@ const substitutionModule = (function () {
     }
     return message;
   }
-  
+  /* Return false if edge cases are met, otherwise, determine whether
+   * to encrypt or decrypt the input string. This will determine whether 
+   * to start with the standard alphabet (encrypt) or new alphabet (decrypt).
+   * If encrypting, set the input value to lower case first. 
+  */
   function substitution(input, alphabet, encode = true) {
     if (!alphabet) return false;
     if (alphabet.length != 26 || duplicateCheck(alphabet) || !alphabet) return false;
