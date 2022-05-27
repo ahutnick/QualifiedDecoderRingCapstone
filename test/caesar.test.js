@@ -33,4 +33,10 @@ describe("Caesar", () => {
         const lower = caesar("try this", 3);
         expect(upper).to.equal(lower);
     });
+
+    it("shifts in the opposite direction when decoding", () => {
+        const message = "usz uijt";
+        const decoded = caesar(message, 1, false);
+        expect(decoded).to.equal("try this");
+    })
 })
