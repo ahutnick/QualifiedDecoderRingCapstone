@@ -37,4 +37,15 @@ describe("Substitution", () => {
         const spaces = substitution("svool svool", "zyxwvutsrqponmlkjihgfedcba", false);
         expect(spaces).to.equal("hello hello");
     })
+
+    it("should ignore capital letters", () => {
+        const upper = substitution("HELLO HELLO", "zyxwvutsrqponmlkjihgfedcba");
+        const lower = substitution("hello hello", "zyxwvutsrqponmlkjihgfedcba");
+        expect(upper).to.equal(lower);
+    });
+
+    it("should include special characters", () => {
+        const special = substitution("%$))@", "abcd$fg%ijk)mn@pqrstuvwxyz", false);
+        expect(special).to.equal("hello");
+    })
 })

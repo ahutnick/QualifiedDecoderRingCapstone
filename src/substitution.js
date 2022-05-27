@@ -35,7 +35,7 @@ const substitutionModule = (function () {
     if (!alphabet) return false;
     if (alphabet.length != 26 || duplicateCheck(alphabet) || !alphabet) return false;
     const standard = standardAlphabet();
-    return (encode) ? crypt(input, standard, alphabet) : crypt(input, alphabet, standard);
+    return (encode) ? crypt(input.toLowerCase(), standard, alphabet) : crypt(input.toLowerCase(), alphabet, standard);
   }
 
   return {
