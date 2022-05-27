@@ -16,6 +16,34 @@ const polybiusModule = (function () {
             ];
   }
 
+  function parseEncrypt(input) {
+    const board = polybiusBoard();
+    let message = "";
+    for (let position in input) {
+      let letter = input[position];
+      if (letter === "i" || letter === "j") letter = "i/j";
+      const row = board.find(row => row.includes(letter));
+      const colPos = row.indexOf(letter) + 1;
+      const rowPos = board.indexOf(row) + 1;
+      message += `${colPos}${rowPos}`;
+    }
+    return message;
+  };
+
+  function encrypt(input) {
+    if (input.includes(" ")) {
+      let message = "";
+      const phrases = input.split(" ");
+      for (let phrase in phrases) {
+        const pair = parseEncrypt(phrases[phrase]);
+        message += `${pair} `;
+      }
+      return message.trim();
+    } else {
+      return parseEncrypt(input);
+    }
+  }
+
   function parseDecrypt(input) {
     const board = polybiusBoard();
     let message = "";
@@ -36,20 +64,15 @@ const polybiusModule = (function () {
         if (phrases[phrase].length % 2 != 0) return false;
         message += `${parseDecrypt(phrases[phrase])} `;
       }
-      message = message.trim();
+      return message.trim();
     } else {
       if (input.length % 2 != 0) return false;
-      message = parseDecrypt(input);
+      return parseDecrypt(input);
     }
-    return message;
   }
 
-  function encrypt(input) {
-
-  };
-
   function polybius(input, encode = true) {
-    return (encode) ? encrypt(input) : decrypt(input);
+    return (encode) ? encrypt(input.toLowerCase()) : decrypt(input);
   }
 
   return {
